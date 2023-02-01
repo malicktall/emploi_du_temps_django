@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes cours</title>
+    {% include "includes/link.html" %}
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand text-secondary" href="/enseignant/home">Emploi<span class="bg-warning ">Du temps</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <input type="text" id="search" class="form-control me-5 my-5 offset-md-3"   placeholder="Search" aria-label="Search">
+
+                    <ul class="navbar-nav ms-e py-4 py-lg-0 offset-md-2 w-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/enseignant/home">Home</a>
+                        </li>
+                       
+                        <li class="nav-item ">
+                            <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <style>
+            .element {
+                display: flex;
+
+                justify-content: center;
+            }
+
+            .card {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding: 80px;
+            }
+        </style>
+    <div class="main-content">
+        <div class="card">
+            <div class="card-header">
+                {{ crenaux.date }} - {{ crenaux.filiere.name }}
+            </div>
+            <div class="card-body card-body-show">
+                <br>
+                <h5 class="card-title">Cour - {{crenaux.matiere.name}}</h5>
+                <p class="card-text element">
+                    Proffeseur : {{ crenaux.enseignant }} <br>
+                    Heure Debut : {{ crenaux.heureDebut }} <br>
+                    Heure Fin : {{ crenaux.heureFin }}
+                </p>
+                <br>
+                <a href="/enseignants/update/{{ crenaux.id }}" class="btn btn-warning">Demander Modification</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {% include "includes/footer.html" %}
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                alert('ca amarch');
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    {% include "includes/scripts.html" %}
+
+</body>
+</html>

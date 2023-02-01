@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+
+    <div class="main-content">
+
+        <div class="top-content ">
+            
+            <div class="items ">
+                
+                    <a href="{% url 'enseignant.add' %}" class="btn btn-primary">Ajouter enseignant</a>
+                    <input id="search" class="form-control search start-end" placeholder=" search...">
+                
+            </div>
+        </div>
+
+        <table class="table table-light table-striped mt-3 ">
+            <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">email</th>
+                    <th scope="col">is_enseignant</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                
+                    {% for ens in enseignant %}
+                    <tr class="">
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ens.username }}</td>
+                    <td>{{ ens.email }}</td>
+                    <td>{{ ens.is_enseignant }}</td>
+                    
+                    <td> 
+                        <a href="/enseignant/show/{{ ens.id }}"> voir</a>
+                    </td>
+
+                    {% empty %}
+                    <td> Pas de enseignant</td>
+                    {% endfor %}
+                    
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) >-1)
+            });
+        });
+    });
+</script>
+{% endblock main %}
+
+
+

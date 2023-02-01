@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+    {% comment %} <h2>{{ message }}</h2> {% endcomment %}
+    <!-- <p> Ajouter</p> -->
+    <div class="main-content add-formulaire">
+        <form method="POST" action="{% url 'crenaux.add' %}">
+            {% csrf_token %}
+            <div class="row m-5 p-5">
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control " name="date">
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <label for="types" class="form-label">Types de cours</label>
+                    <input type="text" class="form-control" name="types" value="{{ old }}">
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <label for="heuredebut" class="form-label">heure debut</label>
+                    <input type="time" class="form-control" name="heureDebut" value="{{ old }}">
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <label for="heurefin" class="form-label">heure Fin</label>
+                    <input type="time" class="form-control" name="heureFin">
+                </div>
+                
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
+                    <select name="enseignant" class="form-select" aria-label="enseignant">
+                        <option >Selectionner un enseignant</option>
+                        {% for enseignant in enseignants %}
+                            <option  value="{{ enseignant.id }}">{{ enseignant.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
+                    <select name="matiere" class="form-select" aria-label="matiere">
+                        <option >Selectionner un matière</option>
+                        {% for matiere in matieres %}
+                            <option value="{{ matiere.id }}">{{ matiere.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 mb-3 mt-3">
+                    <select name="filiere" class="form-select" aria-label="filiere">
+                        <option >Selectionner un filière</option>
+                        {% for filiere in filieres %}
+                            <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                
+            </div>
+            
+            
+            
+            <!-- <div class="row m-5 p-5">
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    {{ form.media }}
+                    {{ form.as_p }}
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div> -->
+        </form>
+    </div>
+
+
+    
+
+{% endblock main %}

@@ -1,0 +1,118 @@
+  <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-container">
+                    <div class="logo-container">
+                        <img class="logo-sidebar" src="assets/img/logo.png" />
+                    </div>
+                    <div class="brand-name-container">
+                        <p class="brand-name">
+                            Gestions<br />
+                            <span class="brand-subname">
+                                Emploie du temps
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-body">
+                <ul class="navigation-list">
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    Dashboard 
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'enseignant.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="col-9">
+                                    Enseignants
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item active">
+                        <a class="navigation-link" href="{% url 'crenaux.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="col-9">
+                                    Créneaux
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'departement.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div class="col-9">
+                                    Départements
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'matiere.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    Matières
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'filiere.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-address-book"></i>
+                                </div>
+                                <div class="col-9">
+                                    Promos
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item">
+                        <a class="navigation-link" href="{% url 'salle.index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-address-book"></i>
+                                </div>
+                                <div class="col-9">
+                                    Salles
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                {% include 'includes/navigation.html' %}
+            </div> 
+         
+        </div>

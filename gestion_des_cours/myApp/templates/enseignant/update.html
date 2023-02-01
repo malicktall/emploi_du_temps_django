@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+{% block title %}
+
+{% endblock title %}
+
+{% block main %}
+<style>
+  .enseignant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+<div class="main-content add-formulaire ">
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="row m-5 p-5 enseignant">
+      <div class="col-6 col-sm-12 col-md-6 mb-3  ">
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{% endblock main %}

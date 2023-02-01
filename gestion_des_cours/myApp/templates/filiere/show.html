@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+<style>
+    
+    .element{
+      display: flex;
+     
+      justify-content: center;
+    }
+    .card{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 80px;
+    }
+  </style>
+    <div class="main-content">
+        <div class="card">
+            <div class="card-header">
+                {{ filiere.name }}
+            </div>
+            <div class="card-body card-body-show">
+                <br>
+                <h5 class="card-title">Promo de - {{filiere.name}}</h5>
+                <p class="card-text element">
+                    Nom : {{ filiere.name }} <br>
+                    <!-- created_at : {{ filiere.created_at }} <br> -->
+                </p>
+                <br>
+                <a href="/filiere/update/{{ filiere.id }}" class="btn btn-warning">Modifier</a>
+                <a href="/filiere/delate/{{filiere.id}}" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %} {% block title %}{% endblock title %}
+ {% block main %}
+
+<div class="main-content">
+  <div class="top-content">
+    <div class="items">
+      <a href="{% url 'matiere.add' %}" class="btn btn-primary">Ajouter matiere</a>
+      <input id="search" class="form-control search start-end"   placeholder=" search..." />
+    </div>
+  </div>
+
+  <table class="table table-light table-striped mt-3">
+    <thead>
+      <tr>
+        <th scope="col">N°</th>
+        <th scope="col">Nom</th>
+        <th scope="col">created_at</th>
+        <th scope="col">id</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      {% for mat in matiere %}
+      <tr class="">
+        
+        <td>{{ forloop.counter }}</td>
+        <td>{{ mat.name }}</td>
+        <td>{{ mat.created_at }}</td>
+        <td>{{ mat.id }}</td>
+
+        <td>
+          <a href="/matiere/show/{{ mat.id }}"> voir</a>
+        </td>
+
+        {% empty %}
+        <td>Pas de matiere</td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) >-1)
+            });
+        });
+    });
+</script>
+
+{% endblock main %}
+
+

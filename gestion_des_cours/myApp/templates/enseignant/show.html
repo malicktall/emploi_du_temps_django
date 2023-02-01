@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+<style>
+    
+    .element{
+      display: flex;
+     
+      justify-content: center;
+    }
+    .card{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 80px;
+    }
+  </style>
+    <div class="main-content">
+        <div class="card">
+            <div class="card-header">
+                {{ enseignant.username }}
+            </div>
+            <div class="card-body card-body-show">
+                <br>
+                <h5 class="card-title element"> {{enseignant.username}}</h5>
+                <p class="card-text element">
+                    email : {{ enseignant.email }} <br>
+                    <!-- created_at : {{ enseignant.created_at }} <br> -->
+                </p>
+                <p class="card-text element">
+                    Is_enseignant : {{ enseignant.is_enseignant }} <br>
+                    <!-- created_at : {{ enseignant.created_at }} <br> -->
+                </p>
+                <br>
+                <a href="/enseignant/update/{{ enseignant.id }}" class="btn btn-warning">Modifier</a>
+                <a href="/enseignant/delate/{{enseignant.id}}" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

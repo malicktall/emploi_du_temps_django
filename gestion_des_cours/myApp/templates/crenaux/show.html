@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+<style>
+    .element {
+        display: flex;
+
+        justify-content: center;
+    }
+
+    .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 80px;
+    }
+</style>
+    <div class="main-content">
+        <div class="card">
+            <div class="card-header">
+                {{ crenaux.date }} - {{ crenaux.filiere.name }}
+            </div>
+            <div class="card-body card-body-show">
+                <br>
+                <h5 class="card-title">Cour - {{crenaux.matiere.name}}</h5>
+                <p class="card-text element">
+                    Proffeseur : {{ crenaux.enseignant }} <br>
+                    Heure Debut : {{ crenaux.heureDebut }} <br>
+                    Heure Fin : {{ crenaux.heureFin }}
+                </p>
+                <br>
+                <a href="/crenaux/update/{{ crenaux.id }}" class="btn btn-warning">Modifier</a>
+                <a href="/crenaux/delate/{{crenaux.id}}" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+    
+{% endblock main %}

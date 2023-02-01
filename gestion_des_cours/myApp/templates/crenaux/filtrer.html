@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %} 
+{% block title %}
+
+{% endblock title %}
+
+ {% block main %}
+
+<div class="main-content add-formulaire add-small">
+  <form method="POST" action="{% url 'crenaux.filtrerUnFiliere' %}">
+    {% csrf_token %}
+    <div class="row m-5 p-5">
+      <div class="col-6 col-sm-12 col-md-6 mb-3">
+        <input type="text" name="filiere" id="" class="form-control" placeholder="Filtrer sur un filiere">
+      </div>
+      <div class="col-6 col-sm-12 col-md-6 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    
+  </form>
+</div>
+
+<div class="main-content add-formulaire add-small">
+  <form method="POST" action="{% url 'crenaux.filtrerSemaine' %}">
+    {% csrf_token %}
+    <div class="row m-5 p-5">
+      <div class="col-6 col-sm-12 col-md-6 mb-3">
+        <input type="number" name="debutSemaine" id="" class="form-control" placeholder="Donner le numéro de la semaine">
+      </div>
+      <div class="col-6 col-sm-12 col-md-6 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    
+  </form>
+</div>
+
+{% endblock main %}

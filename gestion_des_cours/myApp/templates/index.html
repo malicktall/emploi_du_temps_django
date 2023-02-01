@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "includes/link.html" %}
+    <title>Document</title>
+</head>
+<body>
+    <h5>Tester envoie mail</h5>
+
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message | safe}}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+
+        <form method="post" action="">
+            
+            {% csrf_token %}
+            <input type="email" name="email" id="email">
+            <button type="submit">envoyer</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+
+    <div class="main-content">
+
+        <div class="top-content ">
+            
+            <div class="items ">
+                
+                    <a href="{% url 'crenaux.add' %}" class="btn btn-primary">Ajouter crenaux</a>
+                    
+                    
+                    <input id="search" class="form-control search start-end" placeholder=" search..." >
+                
+            </div>
+        </div>
+
+        <div id="calendar"></div>
+
+        <table class="table table-light table-striped mt-3 ">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">HeureDebut</th>
+                    <th scope="col">HeureFin</th>
+                    <th scope="col">Enseignant</th>
+                    <th scope="col">Matière</th>
+                    <th scope="col">Filière</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                
+                    {% for crenau in crenaux %}
+                    <tr class="">
+                    <td>{{ crenau.date }}</td>
+                    <td>{{ crenau.heureDebut }}</td>
+                    <td>{{ crenau.heureFin }}</td>
+                    <td>{{ crenau.enseignant }}</td>
+                    <td>{{ crenau.matiere.name }}</td>
+                    <td>{{ crenau.filiere.name }}</td>
+                    <td> 
+                        <a href="/crenaux/show/{{ crenau.id }}"> voir</a>
+                    </td>
+
+                    {% empty %}
+                    <td> Pas de crenaux</td>
+                    {% endfor %}
+                    
+                </tr>
+                
+            </tbody>
+        </table>
+
+    <!-- <div class="row">
+        {% for day in days %}
+            <div class="col-12 col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <h3>{{ day }}</h3>
+                        </h5>
+                        <p class="card-text">
+                        
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+            {% endfor %}
+    </div> -->
+    <!-- <script>
+       const calendarEl = document.getElementById("calendar");
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['dayGrid', 'timeGrid', 'list'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            events: [
+                {
+                    title: 'Event 1',
+                    start: '2023-01-31T10:00:00',
+                    end: '2023-01-31T12:00:00'
+                },
+                {
+                    title: 'Event 2',
+                    start: '2023-02-01T12:00:00',
+                    end: '2023-02-01T14:00:00'
+                }
+            ],
+        });
+
+        calendar.render();
+
+    </script> -->
+    
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) >-1)
+            });
+        });
+    });
+</script>
+
+<form  action="/crenaux/filtrer" method="post">
+    {% csrf_token %}
+    <div class="row ">
+        <div class="col-6 w-25">
+            <select name="matiere" class="form-select" aria-label="matiere">
+                <option>Filtrer </option>
+            </select>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-success" type="submit">Go</button>
+        </div>
+    </div>
+</form>
+{% endblock main %}
+
+
+

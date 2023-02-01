@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>
+      Gestion des emplois du temps - {% block title %}{% endblock %} |
+      Creative-Tim
+    </title>
+
+   <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    {% include "includes/link.html" %}
+  </head>
+  <body>
+  <style>
+    .main{
+      min-height: 60vh;
+      flex: 1 0 auto;  
+    }
+
+  .footer {
+    flex-shrink: 0;
+  }
+    </style>
+    <div class="page">{% include "includes/sidebar.html" %}</div>
+   
+    <div class="block">
+      <!-- {{ message }} -->
+     <!-- <div class="wrapper"> -->
+      {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message | safe}}
+      </div>
+      {% endfor %}
+     <!-- </div> -->
+     
+    </div>
+   <div class="main">
+      <div class="block">
+        {% block main %}
+      
+        {% endblock main %}
+      </div>
+   </div>
+
+   <div class="footer">
+      <div class="block">
+        {% include "includes/footer.html" %}
+      </div>
+   </div>
+
+    {% include "includes/scripts.html" %}
+  </body>
+</html>
+
+
+<!-- <div class="block">
+  <div class="wrapper">
+    <br>
+    
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message | safe }}
+    </div>
+    {% endfor %}
+
+  </div>
+</div> -->

@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+<style>
+    
+    .element{
+      display: flex;
+     
+      justify-content: center;
+    }
+    .card{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 80px;
+    }
+  </style>
+    <div class="main-content">
+        <div class="card">
+            <div class="card-header element">
+                {{ matiere.name }}
+            </div>
+            <div class="card-body card-body-show ">
+                <br>
+                <h5 class="card-title element">Matiere de - {{matiere.name}}</h5>
+                <p class="card-text element">
+                    Nom : {{ matiere.name }} <br>
+                    <!-- created_at : {{ matiere.created_at }} <br> -->
+                </p>
+                <br>
+                <div class="element">
+                    <a href="/matiere/update/{{ matiere.id }}" class="btn btn-warning ">Modifier</a>
+                    <a href="/matiere/delate/{{matiere.id}}" class="btn btn-danger offset-md-1">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}
