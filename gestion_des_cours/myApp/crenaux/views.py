@@ -34,6 +34,8 @@ def add(request, *args, **kwargs):
     enseignants = User.objects.all()
     matieres = Matiere.objects.all()
     filieres = Filiere.objects.all()
+    promos = Promo.objects.all()
+    salles = Salle.objects.all()
 
     if request.method == "POST":
         date = request.POST.get('date')
@@ -42,7 +44,9 @@ def add(request, *args, **kwargs):
         heureFin = request.POST.get('heureFin')
         enseignant = request.POST.get('enseignant')
         matiere = request.POST.get('matiere')
+        promo = request.POST.get('promo')
         filiere = request.POST.get('filiere')
+        salle = request.POST.get('salle')
         types = request.POST.get('types')
         savedBy = request.user
         if heureDebut >= heureFin:
@@ -54,18 +58,23 @@ def add(request, *args, **kwargs):
         heureDebut = str(heureDebut + ":00")
 
         for crenau in crenaux:
-            # print(crenau.date )
-            # print("les date sont egaux")
+            
             date_crenaux = str(crenau.date)
             heure_crenaux = str(crenau.heureDebut)
-            id_crenaux = str(crenau.filiere.id)
-            # print(date_crenaux)
-            print(f"{crenau.filiere.id} --- {filiere}")
-            # print(filiere)
-            if date_crenaux == date and heure_crenaux == heureDebut and id_crenaux == filiere:
+            id_crenaux = str(crenau.promo.id)
+            crenaux_salle = str(crenau.salle.id)
+           
+            print(f"{crenau.promo.id} --- {promo}")
+            if date_crenaux == date and heure_crenaux == heureDebut and id_crenaux == promo:
                 print("les date sont egaux")
                 messages.error(
                     request, "On ne peut pas avoir deux crenaux a la meme date et heure sur le meme promo")
+                return redirect('crenaux.add')
+            
+            if date_crenaux == date and heure_crenaux == heureDebut and crenaux_salle == salle:
+                print("les date sont egaux")
+                messages.error(
+                    request, "On ne peut pas avoir deux crenaux a la meme date et heure dans la meme salle")
                 return redirect('crenaux.add')
 
         crenaux_objet = {
@@ -74,7 +83,9 @@ def add(request, *args, **kwargs):
             'heureFin': heureFin,
             'enseignant_id': enseignant,
             'matiere_id': matiere,
+            'promo_id': promo,
             'filiere_id': filiere,
+            'salle_id': salle,
             'types': types,
             'savedBy':savedBy
         }
@@ -92,31 +103,12 @@ def add(request, *args, **kwargs):
         'enseignants': enseignants,
         'matieres': matieres,
         'filieres': filieres,
+        'promos': promos,
+        'salles':salles,
         'message': messages
     }
     return render(request, 'crenaux/add.html', context)
 
-
-# def add(request):
-#     form = RowCreneauForm()
-#     if request.method == "POST":
-#         form = RowCreneauForm(request.POST)
-#         if form.is_valid():
-#             newCrenaux = Creneau.objects.create(**form.cleaned_data)
-#             newCrenaux.save()
-#             messages.success(request, "Crenaux ajouter avec succès !")
-#     return render(request, 'crenaux/add.html', {'message': messages, 'form': form})
-
-
-# def update(request, my_id):
-#     # form = RowMatiereForm()
-#     crenaux = Creneau.objects.get(id=my_id)
-#     form = CreneauForm(request.POST or None, instance=crenaux)
-#     if form.is_valid():
-#         form.save()
-#         form = CreneauForm()
-#         messages.success(request, "Crenaux modifier avec succès !")
-#     return render(request, 'crenaux/update.html', {'message': messages, 'form': form})
 
 @login_required(login_url="/login/")
 @staff_member_required
@@ -124,12 +116,13 @@ def update(request, my_id):
     enseignants = User.objects.all()
     matieres = Matiere.objects.all()
     filieres = Filiere.objects.all()
+    promos = Promo.objects.all()
 
     crenaux = Creneau.objects.get(id=my_id)
     return render(request, 'crenaux/update.html',
                   {'crenaux': crenaux, 'enseignants': enseignants,
-                   'matieres': matieres, 'filieres': filieres}
-                  )
+                   'matieres': matieres, 'filieres': filieres,
+                   'promos':promos})
 
 
 def to_update(request, my_id):
@@ -141,6 +134,7 @@ def to_update(request, my_id):
         heureFin = request.POST.get('heureFin')
         enseignant = request.POST.get('enseignant')
         matiere = request.POST.get('matiere')
+        promo = request.POST.get('promo')
         filiere = request.POST.get('filiere')
         types = request.POST.get('types')
         savedBy = request.user
@@ -156,6 +150,7 @@ def to_update(request, my_id):
                 crenaux.heureFin = heureFin
                 crenaux.enseignant_id = enseignant
                 crenaux.matiere_id = matiere
+                crenaux.promo_id = promo
                 crenaux.filiere_id = filiere
                 crenaux.types = types
                 crenaux.savedBy_id = savedBy
@@ -198,7 +193,7 @@ def filtrerUnFiliere(request):
         filiere = request.POST.get('filiere')
         fil = Filiere.objects.get(name=filiere)
         id = fil.id
-        crenaux = Creneau.objects.filter(filiere=id)
+        crenaux = Creneau.objects.filter(filiere_id=id)
         return render(request, 'crenaux/index.html', {'crenaux': crenaux})
     except Filiere.DoesNotExist:
         messages.error(request, "Ce filiere n'existe pas !")

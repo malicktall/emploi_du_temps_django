@@ -33,7 +33,7 @@ def update(request, my_id):
         heureFin = request.POST.get('heureFin')
         enseignant = request.user
         savedBy = crenaux.savedBy.email
-        id_mat = request.POST.get('matiere')
+        matiere = request.POST.get('matiere')
         types = request.POST.get('types')
 
         if heureDebut >= heureFin:
@@ -52,7 +52,7 @@ def update(request, my_id):
             'name': enseignant,
 
         }
-
+        print(f"admin : {savedBy}")
         receivers = [enseignant.email, savedBy]
 
         has_send = send_Email_modification(

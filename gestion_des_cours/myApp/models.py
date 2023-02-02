@@ -4,11 +4,31 @@ from django.db.models import Max
 # Create your models here.
 
 
+class Departement(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['name']
+
+class Filiere(models.Model):
+    name = models.CharField(max_length=100)
+    departement = models.ForeignKey(Departement, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['name']
+
+
+class Promo(models.Model):
+    name = models.CharField(max_length=100)
+    filiere = models.ForeignKey(Filiere,  on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['name']
+        
+
+
+ 
 class User(AbstractUser):
     is_enseignant = models.BooleanField(default=False)
-    # departements = models.ManyToManyField(null=True, blank=True)
-
-
+    departements = models.ManyToManyField(Departement, blank=True)
 
 
 class Matiere(models.Model):
@@ -19,33 +39,13 @@ class Matiere(models.Model):
         ordering = ['-created_at']
 
 
-class Departement(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ['name']
-
-
 class Salle(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
         ordering = ['name']
 
-
-class Filiere(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ['name']
         
-        
-# class Promo(models.Model):
-#     name = models.CharField(max_length=100)
-#     filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE)
-    
-#     class Meta:
-#         ordering = ['name']
 
 
 class Creneau(models.Model):
@@ -56,8 +56,9 @@ class Creneau(models.Model):
     enseignant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enseignant')
     savedBy = models.ForeignKey(User, on_delete=models.CASCADE, related_name='savedBy')
     matiere = models.ForeignKey(Matiere, on_delete=models.CASCADE)
+    promo = models.ForeignKey(Promo, on_delete=models.CASCADE)
     filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE)
-    # salle = models.ForeignKey(Salle, on_delete=models.CASCADE)
+    salle = models.ForeignKey(Salle, on_delete=models.CASCADE)
     types = models.CharField(max_length=20)
     
 

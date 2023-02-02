@@ -15,7 +15,6 @@
         <th scope="col">N°</th>
         <th scope="col">Nom</th>
         <th scope="col">created_at</th>
-        <th scope="col">id</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -26,7 +25,6 @@
         <td>{{ forloop.counter }}</td>
         <td>{{ mat.name }}</td>
         <td>{{ mat.created_at }}</td>
-        <td>{{ mat.id }}</td>
 
         <td>
           <a href="/matiere/show/{{ mat.id }}"> voir</a>

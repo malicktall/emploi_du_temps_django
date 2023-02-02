@@ -4,5 +4,61 @@
 
 {% block main %}
 
+    <div class="main-content">
 
+        <div class="top-content ">
+            
+            <div class="items ">
+                
+                    <a href="{% url 'promo.add' %}" class="btn btn-primary">Ajouter Promo</a>
+                    <input id="search" class="form-control search start-end" placeholder=" search...">
+                
+            </div>
+        </div>
+
+        <table class="table table-light table-striped mt-3 ">
+            <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Filiere</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                
+                    {% for pro in promo %}
+                    <tr class="">
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ pro.name }}</td>
+                    <td>{{ pro.filiere.name }}</td>
+                    
+                    
+                    <td> 
+                        <a href="/promo/show/{{ pro.id }}"> voir</a>
+                    </td>
+
+                    {% empty %}
+                    <td> Pas de Promo</td>
+                    {% endfor %}
+                    
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) >-1)
+            });
+        });
+    });
+</script>
 {% endblock main %}
+
+
+

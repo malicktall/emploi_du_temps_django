@@ -10,7 +10,7 @@
             
             <div class="items ">
                 
-                    <a href="{% url 'filiere.add' %}" class="btn btn-primary">Ajouter Promo</a>
+                    <a href="{% url 'filiere.add' %}" class="btn btn-primary">Ajouter Filiere</a>
                     <input id="search" class="form-control search start-end" placeholder=" search...">
                 
             </div>
@@ -21,6 +21,7 @@
                 <tr>
                     <th scope="col">N°</th>
                     <th scope="col">Nom</th>
+                    <th scope="col">Departement</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <!-- <th scope="row">1</th> -->
                     <td>{{ forloop.counter }}</td>
                     <td>{{ fil.name }}</td>
+                    <td>{{ fil.departement.name }}</td>
                     
                     
                     <td> 
@@ -38,7 +40,7 @@
                     </td>
 
                     {% empty %}
-                    <td> Pas de Promo</td>
+                    <td> Pas de Filiere</td>
                     {% endfor %}
                     
                 </tr>

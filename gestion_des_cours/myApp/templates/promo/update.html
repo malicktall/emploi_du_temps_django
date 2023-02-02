@@ -1,8 +1,31 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %} 
+{% block title %}
 
-{% block title %}{% endblock title %}
+{% endblock title %}
 
-{% block main %}
+ {% block main %} 
+<div class="main-content add-formulaire add-small">
+  <form method="POST" action="/promo/toupdate/{{ promo.id }}">
+    {% csrf_token %}
 
+    <div class="row m-5 p-5">
+      <label for="date" class="form-label">Date</label>
+      <div class="col-12 col-sm-12 col-md-12 mb-3">
+          <input type="text" name="name" id="name" placeholder="nom promo" class="form-control" value="{{ promo.name }}">
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 mb-3 mt-3">
+        <select name="filiere" class="form-select" aria-label="filiere">
+          <option value="{{ promo.filiere.id }}">{{ promo.filiere.name }}</option>
+          {% for filiere in filieres %}
+          <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-6 col-sm-12 col-md-6 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
 
 {% endblock main %}

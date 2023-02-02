@@ -26,6 +26,7 @@ urlpatterns = [
     path("enseignant/", include("myApp.enseignant.urls")),
     path("matiere/", include("myApp.matiere.urls")),
     path("filiere/", include("myApp.filiere.urls")),
+    path("promo/", include("myApp.promo.urls")),
     path("enseignants/", include("myApp.home.enseignant.urls")),
     path("salle/", include("myApp.salle.urls")),
     

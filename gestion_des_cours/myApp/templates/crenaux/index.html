@@ -28,7 +28,8 @@
                     <th scope="col">HeureFin</th>
                     <th scope="col">Enseignant</th>
                     <th scope="col">Matière</th>
-                    <th scope="col">Filière</th>
+                    <th scope="col">Promo</th>
+                    <th scope="col">Salle</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -41,7 +42,8 @@
                     <td>{{ crenau.heureFin }}</td>
                     <td>{{ crenau.enseignant }}</td>
                     <td>{{ crenau.matiere.name }}</td>
-                    <td>{{ crenau.filiere.name }}</td>
+                    <td>{{ crenau.promo.name }}</td>
+                    <td>{{ crenau.salle.name }}</td>
                     <td> 
                         <a href="/crenaux/show/{{ crenau.id }}"> voir</a>
                     </td>

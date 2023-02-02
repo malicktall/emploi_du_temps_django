@@ -28,7 +28,7 @@
                 
                 <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
                     <select name="enseignant" class="form-select" aria-label="enseignant">
-                        <option >Selectionner un enseignant</option>
+                        
                         <option  value="{{ enseignant.id }}">{{ crenaux.enseignant }}</option>
                         {% for enseignant in enseignants %}
                             <option  value="{{ enseignant.id }}">{{ enseignant.username }}</option>
@@ -37,16 +37,23 @@
                 </div>
                 <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
                     <select name="matiere" class="form-select" aria-label="matiere">
-                        <option >Selectionner un matière</option>
-                        <option  value="{{ matiere.id }}">{{ crenaux.matiere.name }}</option>
+                        
+                        <option  value="{{ crenaux.matiere.id }}">{{ crenaux.matiere.name }}</option>
                         {% for matiere in matieres %}
                             <option value="{{ matiere.id }}">{{ matiere.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 mb-3 mt-3">
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
+                    <select name="promo" class="form-select" aria-label="promo">
+                        <option  value="{{ crenaux.promo.id }}">{{ crenaux.promo.name }}</option>
+                        {% for promo in promos %}
+                            <option value="{{ promo.id }}">{{ promo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
                     <select name="filiere" class="form-select" aria-label="filiere">
-                        <option>Selectionner un filière</option>
                         <option value="{{ crenaux.filiere.id }}">{{ crenaux.filiere.name }}</option>
                         {% for filiere in filieres %}
                             <option value="{{ filiere.id }}">{{ filiere.name }}</option>

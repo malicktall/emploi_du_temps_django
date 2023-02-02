@@ -42,6 +42,22 @@
                         {% endfor %}
                     </select>
                 </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
+                    <select name="promo" class="form-select" aria-label="promo">
+                        <option >Selectionner un promo</option>
+                        {% for promo in promos %}
+                            <option value="{{ promo.id }}">{{ promo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-sm-12 col-md-6 mb-3 mt-3">
+                    <select name="salle" class="form-select" aria-label="salle">
+                        <option >Selectionner une salle</option>
+                        {% for salle in salles %}
+                            <option value="{{ salle.id }}">{{ salle.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="col-12 col-sm-12 col-md-12 mb-3 mt-3">
                     <select name="filiere" class="form-select" aria-label="filiere">
                         <option >Selectionner un filière</option>

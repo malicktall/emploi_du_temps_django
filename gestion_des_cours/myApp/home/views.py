@@ -54,13 +54,13 @@ def index(request):
     crenaux_f_info = Creneau.objects.filter(filiere_id=1).count()
     crenaux_f_info = int(crenaux_f_info)
 
-    crenaux_f_lpc = Creneau.objects.filter(filiere_id=2).count()
+    crenaux_f_lpc = Creneau.objects.filter(filiere_id=3).count()
     crenaux_f_lpc = int(crenaux_f_lpc)
 
     crenaux_f_lmio = Creneau.objects.filter(filiere_id=4).count()
     crenaux_f_lmio = int(crenaux_f_lmio)
 
-    crenaux_f_lmi = Creneau.objects.filter(filiere_id=5).count()
+    crenaux_f_lmi = Creneau.objects.filter(filiere_id=2).count()
     crenaux_f_lmi = int(crenaux_f_lmi)
 
     filiere_list = ['lgi', 'lmio', 'lmi', 'lpc']
@@ -86,7 +86,7 @@ def index(request):
     enseignant = User.objects.filter(is_enseignant='True').count()
     enseignant = int(enseignant)
     
-    user = User.objects.filter(is_enseignant='False').count()
+    user = User.objects.filter(is_staff='True').count()
     user = int(user)
     
     personnes = ['enseignant', 'administrateur']
